@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fund My Epic Adventure</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Fredoka',sans-serif;background:linear-gradient(#bfe9f7 0,#d9f5e8 340px);color:#1d2b24}
+  .card{background:#fff;border:2.5px solid #1d2b24;border-radius:22px;box-shadow:5px 5px 0 #1d2b24}
+  .bar{height:14px;background:#cfe3ea;border:2px solid #1d2b24;border-radius:99px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:repeating-linear-gradient(45deg,#37b877 0 10px,#2e9a62 10px 20px);transition:width .6s}
+  .amt{border:2px solid #1d2b24;border-radius:10px;padding:2px 9px;background:#fff;font-weight:500}
+  .amt.on{background:#ffd35c}
+  .pay{background:#2e9a62;color:#fff;border:2.5px solid #1d2b24;border-radius:14px;font-weight:600;padding:9px;width:100%;box-shadow:0 4px 0 #1d2b24;transition:.1s}
+  .pay:active{transform:translateY(3px);box-shadow:0 1px 0 #1d2b24}
+  input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;width:100%}
+  :focus-visible{outline:3px solid #ff8a3d;outline-offset:2px}
+</style>
+</head>
+<body>
+<!-- ============ HERO ============ -->
+<header class="max-w-3xl mx-auto px-4 pt-8 text-center">
+  <div class="flex items-center justify-center gap-4">
+    <!-- 👉 CHANGE: your avatar image path -->
+    <img src="avatar.png" onerror="this.outerHTML='<div class=&quot;text-6xl card !rounded-full w-24 h-24 flex items-center justify-center bg-yellow-200&quot;>🧑‍🌾</div>'" class="w-24 h-24 rounded-full card object-cover" alt="Me">
+    <h1 class="text-4xl sm:text-5xl font-bold" style="text-shadow:3px 3px 0 #ffd35c">Fund My Epic Adventure!</h1>
+  </div>
+  <!-- 👉 CHANGE: your story -->
+  <p class="mt-4 max-w-xl mx-auto">Hi! I'm heading out on a big trek and I need a little gear and travel help. Pick an item below and chip in — every rupee counts!</p>
+  <div class="bar mt-4 max-w-xl mx-auto"><i id="totalBar" style="width:0"></i></div>
+  <p id="totalText" class="text-sm mt-1 font-medium"></p>
+</header>
+
+<!-- ============ ITEM GRID ============ -->
+<main id="grid" class="max-w-5xl mx-auto px-4 py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></main>
+<footer class="text-center py-6 text-sm">Made with ❤️ for the road · <a class="underline" href="/admin.html">Admin Login</a></footer>
+
+<!-- ============ PAYMENT MODAL ============ -->
+<div id="modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start sm:items-center justify-center p-4 overflow-y-auto">
+  <div class="card w-full max-w-md p-5 bg-white/95 relative">
+    <button onclick="closeModal()" class="absolute top-3 right-4 text-2xl" aria-label="Close">✕</button>
+    <h2 class="text-2xl font-bold">Support: <span id="mItem"></span></h2>
+    <p class="text-3xl font-bold text-green-700">₹<span id="mAmt"></span></p>
+
+    <!-- ===== 👉 INSERT YOUR UPI QR CODE HERE =====
+         1) Save your QR image as  public/upi-qr.png  (or change the src below). -->
+    <img id="qr" src="upi-qr.png" alt="UPI QR" class="mx-auto my-3 w-48 h-48 object-contain border-2 border-dashed border-gray-400 rounded-xl p-1">
+
+    <div class="flex items-center gap-2 justify-center">
+      <!-- ===== 👉 INSERT YOUR UPI ID HERE (see UPI_ID constant in the script below) ===== -->
+      <code id="upiId" class="bg-yellow-100 border-2 border-black rounded-lg px-2 py-1"></code>
+      <button onclick="copyUpi(this)" class="amt">Copy UPI ID</button>
+    </div>
+    <a id="upiLink" class="block text-center text-sm underline mt-2 sm:hidden">Open in UPI app</a>
+
+    <p class="text-sm my-3">Scan &amp; pay via Google Pay / PhonePe / Paytm, then optionally leave your name &amp; a message below.</p>
+    <div class="space-y-2">
+      <input id="dName" placeholder="Your name (optional)">
+      <input id="dEmail" type="email" placeholder="Email (optional)">
+      <textarea id="dMsg" rows="2" placeholder="An encouraging message…"></textarea>
+      <button class="pay" onclick="confirmPaid()">I Have Paid ✓</button>
+    </div>
+    <p id="mDone" class="hidden text-center font-semibold text-green-700 mt-3">Thank you! 🎉 Your support will show up once I verify the payment.</p>
+  </div>
+</div>
+
+<script>
+// ===== 👉 CONFIG: put your real UPI details here =====
+const UPI_ID = '9410988578@fam';
+const PAYEE_NAME = 'YOUR TRIPPER ';
+const QUICK = [5, 10, 20, 50, 100, 500];
+
+let items = [], sel = {}, cur = null;
+const $ = s => document.querySelector(s);
+const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+const pct = (a, b) => Math.min(100, b ? a / b * 100 : 0);
+const iconHtml = i => /^(\/|http)/.test(i) ? `<img src="${i}" class="w-16 h-16 object-contain">` : `<span class="text-5xl">${i}</span>`;
+
+async function load() {
+  items = await (await fetch('/api/items')).json();
+  render();
+}
+function render() {
+  const raised = items.reduce((s, i) => s + i.raised, 0), goal = items.reduce((s, i) => s + i.target, 0);
+  $('#totalBar').style.width = pct(raised, goal) + '%';
+  $('#totalText').textContent = `TOTAL ADVENTURE GOAL: ${inr(raised)} / ${inr(goal)} (${Math.round(pct(raised, goal))}% Raised)`;
+  // Don't wipe inputs while the visitor is typing during the auto-refresh
+  if (document.activeElement && document.activeElement.classList.contains('custom')) return updateBars();
+  $('#grid').innerHTML = items.map(i => `
+    <article class="card p-4" data-id="${i._id}">
+      <div class="flex gap-3 items-center">${iconHtml(i.icon)}
+        <div><h3 class="font-bold text-lg leading-tight">${i.title}</h3><p class="text-sm text-gray-600">${i.tagline || ''}</p></div></div>
+      <p class="mt-3 font-semibold bar-text">${inr(i.raised)} / ${inr(i.target)}</p>
+      <div class="bar"><i style="width:${pct(i.raised, i.target)}%"></i></div>
+      <p class="mt-3 text-sm font-medium">Quick Donation</p>
+      <div class="flex flex-wrap gap-1.5 my-2">${QUICK.map(a => `<button class="amt ${(sel[i._id] || 5) === a ? 'on' : ''}" onclick="pick('${i._id}',${a})">₹${a}</button>`).join('')}</div>
+      <input class="custom mb-3" type="number" min="1" placeholder="Custom amount" value="${sel[i._id] && !QUICK.includes(sel[i._id]) ? sel[i._id] : ''}" oninput="pick('${i._id}',+this.value,true)">
+      <button class="pay" onclick="openModal('${i._id}')">SUPPORT MY JOURNEY<br><small>Pay with UPI/QR</small></button>
+    </article>`).join('');
+}
+function updateBars() { items.forEach(i => { const c = document.querySelector(`[data-id="${i._id}"]`); if (!c) return; c.querySelector('.bar-text').textContent = `${inr(i.raised)} / ${inr(i.target)}`; c.querySelector('.bar i').style.width = pct(i.raised, i.target) + '%'; }); }
+function pick(id, a, typing) { sel[id] = a; if (!typing) render(); }
+
+function openModal(id) {
+  cur = items.find(i => i._id === id); const amt = sel[id] || 5;
+  if (!(amt > 0)) return alert('Enter a valid amount');
+  cur.amt = amt;
+  $('#mItem').textContent = cur.title; $('#mAmt').textContent = amt; $('#upiId').textContent = UPI_ID;
+  $('#upiLink').href = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amt}&cu=INR&tn=${encodeURIComponent(cur.title)}`;
+  $('#mDone').classList.add('hidden'); $('#modal').classList.remove('hidden');
+}
+const closeModal = () => $('#modal').classList.add('hidden');
+function copyUpi(b) { navigator.clipboard.writeText(UPI_ID); b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy UPI ID', 1500); }
+async function confirmPaid() {
+  const r = await fetch('/api/donations', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ itemId: cur._id, amount: cur.amt, name: $('#dName').value, email: $('#dEmail').value, message: $('#dMsg').value }) });
+  if (r.ok) { $('#mDone').classList.remove('hidden'); ['#dName', '#dEmail', '#dMsg'].forEach(s => $(s).value = ''); }
+  else alert('Something went wrong. Please try again.');
+}
+load(); setInterval(load, 10000); // near-real-time: re-fetch every 10s
+</script>
+</body>
+</html>

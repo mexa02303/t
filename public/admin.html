@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · Fund My Trip</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Fredoka',sans-serif;background:#d9f5e8;color:#1d2b24}
+  .card{background:#fff;border:2.5px solid #1d2b24;border-radius:20px;box-shadow:4px 4px 0 #1d2b24}
+  input,select{border:2px solid #1d2b24;border-radius:10px;padding:5px 8px;width:100%}
+  .btn{border:2px solid #1d2b24;border-radius:10px;padding:4px 12px;font-weight:600;background:#ffd35c}
+  .btn.g{background:#37b877;color:#fff}.btn.r{background:#ff7b6b;color:#fff}
+</style></head>
+<body class="p-4">
+<div id="login" class="card max-w-sm mx-auto mt-24 p-6 space-y-3">
+  <h1 class="text-2xl font-bold">Admin login</h1>
+  <input id="pw" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+  <button class="btn g w-full" onclick="doLogin()">Log in</button>
+  <p id="err" class="text-red-600 text-sm"></p>
+</div>
+
+<div id="dash" class="hidden max-w-6xl mx-auto space-y-6">
+  <div class="flex justify-between items-center"><h1 class="text-3xl font-bold">Dashboard</h1>
+    <span><a href="/" class="underline mr-4">View site</a><button class="btn" onclick="logout()">Log out</button></span></div>
+  <div id="summary" class="grid gap-3 grid-cols-2 md:grid-cols-4"></div>
+
+  <section class="card p-4 overflow-x-auto">
+    <h2 class="text-xl font-bold mb-2">Gear &amp; expenses</h2>
+    <table class="w-full text-sm"><thead><tr class="text-left"><th>Icon</th><th>Title</th><th>Tagline</th><th>Target ₹</th><th>Raised ₹</th><th>On?</th><th></th></tr></thead>
+    <tbody id="items"></tbody></table>
+    <h3 class="font-bold mt-4 mb-1">Add new item</h3>
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-2">
+      <input id="nIcon" placeholder="Icon (emoji / URL)"><input id="nTitle" placeholder="Title"><input id="nTag" placeholder="Tagline">
+      <input id="nTarget" type="number" placeholder="Target ₹"><button class="btn g" onclick="addItem()">Add</button></div>
+  </section>
+
+  <section class="card p-4 overflow-x-auto">
+    <h2 class="text-xl font-bold mb-2">Donations (claimed payments)</h2>
+    <p class="text-xs mb-2">Check your UPI app first, then click <b>Verify</b> to add the amount to that item's raised total.</p>
+    <table class="w-full text-sm"><thead><tr class="text-left"><th>Date</th><th>Item</th><th>₹</th><th>Donor</th><th>Message</th><th>Status</th><th></th></tr></thead>
+    <tbody id="dons"></tbody></table>
+  </section>
+</div>
+
+<script>
+let token = localStorage.getItem('adminToken');
+const $ = s => document.querySelector(s);
+const api = async (path, method = 'GET', body) => {
+  const r = await fetch('/api/admin' + path, { method, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: body && JSON.stringify(body) });
+  if (r.status === 401) { logout(); throw 0; } return r.json();
+};
+async function doLogin() {
+  const r = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('#pw').value }) });
+  const d = await r.json(); if (!r.ok) return $('#err').textContent = d.error;
+  token = d.token; localStorage.setItem('adminToken', token); show();
+}
+function logout() { localStorage.removeItem('adminToken'); token = null; $('#dash').classList.add('hidden'); $('#login').classList.remove('hidden'); }
+async function show() { $('#login').classList.add('hidden'); $('#dash').classList.remove('hidden'); refresh(); }
+async function refresh() {
+  const [items, dons] = await Promise.all([api('/items'), api('/donations')]);
+  const total = items.reduce((s, i) => s + i.raised, 0);
+  $('#summary').innerHTML = `<div class="card p-3 bg-yellow-100"><p class="text-sm">Total received</p><p class="text-2xl font-bold">₹${total.toLocaleString('en-IN')}</p></div>` +
+    items.map(i => `<div class="card p-3"><p class="text-sm">${i.icon.length < 5 ? i.icon : ''} ${i.title}</p><p class="text-xl font-bold">₹${i.raised.toLocaleString('en-IN')}</p></div>`).join('');
+  $('#items').innerHTML = items.map(i => `<tr data-id="${i._id}" class="align-top">
+    <td><input class="f-icon" value="${i.icon}" style="width:70px"></td><td><input class="f-title" value="${i.title}"></td>
+    <td><input class="f-tagline" value="${i.tagline || ''}"></td><td><input class="f-target" type="number" value="${i.target}"></td>
+    <td><input class="f-raised" type="number" value="${i.raised}"></td>
+    <td><input class="f-active" type="checkbox" ${i.active ? 'checked' : ''} style="width:auto"></td>
+    <td class="whitespace-nowrap"><button class="btn g" onclick="saveItem('${i._id}')">Save</button> <button class="btn r" onclick="delItem('${i._id}')">Delete</button></td></tr>`).join('');
+  $('#dons').innerHTML = dons.map(d => `<tr class="border-t"><td>${new Date(d.createdAt).toLocaleString()}</td><td>${d.itemTitle}</td><td>${d.amount}</td>
+    <td>${esc(d.name)}<br><small>${esc(d.email || '')}</small></td><td>${esc(d.message || '')}</td><td>${d.status}</td>
+    <td class="whitespace-nowrap">${d.status === 'pending' ? `<button class="btn g" onclick="act('${d._id}','verify')">Verify</button> <button class="btn r" onclick="act('${d._id}','reject')">Reject</button>` : ''}</td></tr>`).join('')
+    || '<tr><td colspan="7">No donations yet.</td></tr>';
+}
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+async function saveItem(id) {
+  const r = document.querySelector(`tr[data-id="${id}"]`), v = c => r.querySelector('.f-' + c);
+  await api('/items/' + id, 'PUT', { icon: v('icon').value, title: v('title').value, tagline: v('tagline').value, target: +v('target').value, raised: +v('raised').value, active: v('active').checked });
+  refresh();
+}
+async function delItem(id) { if (confirm('Delete this item? (Tip: untick "On?" to just hide it)')) { await api('/items/' + id, 'DELETE'); refresh(); } }
+async function addItem() {
+  if (!$('#nTitle').value) return;
+  await api('/items', 'POST', { icon: $('#nIcon').value || '🎒', title: $('#nTitle').value, tagline: $('#nTag').value, target: +$('#nTarget').value || 1000, order: 99 });
+  ['#nIcon', '#nTitle', '#nTag', '#nTarget'].forEach(s => $(s).value = ''); refresh();
+}
+const act = async (id, a) => { await api(`/donations/${id}/${a}`, 'POST'); refresh(); };
+if (token) show();
+</script></body></html>
