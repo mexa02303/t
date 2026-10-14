@@ -9,6 +9,10 @@ const crypto = require('crypto');
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
+const path = require('path');
+app.set('trust proxy', 1);
+const ADMIN_PATH = process.env.ADMIN_PATH || 'my-secret-panel';
+app.get('/' + ADMIN_PATH, (_, res) => res.sendFile(path.join(__dirname, 'private', 'admin.html')));
 
 // ---------- Models ----------
 const Item = mongoose.model('Item', new mongoose.Schema({
@@ -47,10 +51,14 @@ app.post('/api/donations', async (req, res) => {
 });
 
 // ---------- Admin API ----------
-app.post('/api/admin/login', (req, res) =>
-  req.body.password === process.env.ADMIN_PASSWORD
-    ? res.json({ token: sign(Date.now() + 12 * 3600e3) })
-    : res.status(401).json({ error: 'Wrong password' }));
+const fails = {};
+app.post('/api/admin/login', (req, res) => {
+  const f = fails[req.ip] = fails[req.ip] || { n: 0, until: 0 };
+  if (Date.now() < f.until) return res.status(429).json({ error: 'Too many attempts. Try again in 15 minutes.' });
+  if (req.body.password === process.env.ADMIN_PASSWORD) { f.n = 0; return res.json({ token: sign(Date.now() + 12 * 3600e3) }); }
+  if (++f.n >= 5) { f.n = 0; f.until = Date.now() + 15 * 60e3; }
+  res.status(401).json({ error: 'Wrong password' });
+});
 
 app.get('/api/admin/items', admin, async (_, res) => res.json(await Item.find().sort('order')));
 app.post('/api/admin/items', admin, async (req, res) => res.json(await Item.create(req.body)));
