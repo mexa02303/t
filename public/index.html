@@ -58,6 +58,43 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
 .faq-item[open] summary:after{content:"−"}
 .faq-item p{margin:12px 28px 2px 0;color:#52645d;line-height:1.6;font-size:14px}
 
+
+
+.progress-section{background:#e9f0e9;padding:58px 18px;color:#244236}
+.progress-wrap{max-width:1050px;margin:auto}
+.progress-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+.progress-eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#4b9870}
+.progress-title{font:800 clamp(27px,4vw,38px) 'Manrope','Inter',sans-serif;margin:7px 0;color:#244236}
+.progress-subtitle{color:#71847a;font-size:14px}
+.progress-controls{display:flex;gap:8px;flex-wrap:wrap;padding:6px;border-radius:999px;background:#e9f0e9;box-shadow:inset 4px 4px 9px #cbd5cc,inset -4px -4px 9px #fff}
+.progress-controls button{border:0;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;color:#71847a;background:transparent;cursor:pointer}
+.progress-controls button.active{color:#fff;background:#438d68;box-shadow:3px 3px 7px #bdcabe,-2px -2px 6px #fff}
+.progress-dashboard{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:18px;align-items:stretch}
+.progress-panel,.progress-summary{background:#e9f0e9;border-radius:24px;padding:24px;box-shadow:9px 9px 20px #cbd5cc,-9px -9px 20px #fff}
+.progress-panel h3{font-size:16px;font-weight:800;margin:0 0 5px;color:#315844}
+.chart-hint{font-size:12px;color:#829188;margin-bottom:15px}
+.chart-scroll{width:100%;overflow-x:auto}
+#progressSvg{display:block;width:100%;min-width:480px;height:auto;overflow:visible}
+.chart-gridline{stroke:#cbd7cd;stroke-width:1;stroke-dasharray:4 6}
+.chart-axis{fill:#829188;font:11px Inter,sans-serif}
+.chart-bar{cursor:pointer;transition:opacity .18s,filter .18s}
+.chart-bar:hover,.chart-bar:focus{filter:brightness(1.08);opacity:.86;outline:none}
+.chart-tooltip{min-height:40px;margin-top:12px;padding:11px 14px;border-radius:13px;background:#e9f0e9;box-shadow:inset 3px 3px 7px #cbd5cc,inset -3px -3px 7px #fff;color:#557064;font-size:12px}
+.progress-summary{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.progress-ring{width:155px;height:155px;position:relative;margin:5px auto 18px}
+.progress-ring svg{width:100%;height:100%;transform:rotate(-90deg);filter:drop-shadow(3px 3px 5px #cbd5cc)}
+.progress-ring circle{fill:none;stroke-width:12}
+.progress-ring .ring-bg{stroke:#d5dfd6}
+.progress-ring .ring-value{stroke:#55a879;stroke-linecap:round;transition:stroke-dashoffset .7s ease}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-center strong{font:800 30px 'Manrope',sans-serif;color:#315844}
+.ring-center span{font-size:11px;color:#829188}
+.summary-label{font-size:12px;color:#829188;margin-top:5px}
+.summary-amount{font:800 22px 'Manrope',sans-serif;color:#315844;margin-top:3px}
+.summary-foot{font-size:12px;color:#71847a;margin-top:10px;line-height:1.6}
+.chart-empty{padding:24px;text-align:center;color:#71847a}
+@media(max-width:760px){.progress-dashboard{grid-template-columns:1fr}.progress-summary{display:grid;grid-template-columns:120px 1fr;gap:0 16px;text-align:left;justify-items:start;padding:18px}.progress-ring{width:112px;height:112px;grid-row:span 3;margin:0}.ring-center strong{font-size:23px}.progress-summary .summary-label,.progress-summary .summary-amount,.progress-summary .summary-foot{align-self:center}}
+@media(max-width:600px){.progress-section{padding:40px 14px}.progress-panel{padding:17px 13px}.progress-summary{padding:16px}.progress-controls button{padding:9px 12px;font-size:12px}}
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -67,7 +104,7 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
 <section class="hero">
   <div class="hero-inner">
     <nav class="hero-top">
-      <div class="hero-brand">Fund My Epic Adventure</div>
+      <div class="hero-brand">🏔️ Fund My Epic Adventure</div>
       <div class="hero-nav">
         <a href="#grid">Items</a>
         <a href="/supporters.html">Supporters</a>
@@ -75,7 +112,7 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
       </div>
     </nav>
     <div class="hero-copy">
-      <div class="hero-kicker"> A Himalayan Trek Dream</div>
+      <div class="hero-kicker">🥾 A Himalayan Trek Dream</div>
       <h1>Help Me Go <span style="color:#a9ed75">Hiking</span></h1>
       <p>Support my journey to the mountains. Your contribution helps me cover essential gear, travel, and everything needed for the trail.</p>
       <div class="hero-actions">
@@ -96,6 +133,43 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
 </section>
 
 <section class="fund-section"><main id="grid" class="max-w-5xl mx-auto px-4 py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></main></section>
+
+
+<section class="progress-section" id="progress">
+  <div class="progress-wrap">
+    <div class="progress-head">
+      <div>
+        <p class="progress-eyebrow">The journey so far</p>
+        <h2 class="progress-title">Adventure Analytics</h2>
+        <p class="progress-subtitle">A live look at the progress of this mountain dream.</p>
+      </div>
+      <div class="progress-controls" aria-label="Chart display options">
+        <button id="chartAmountBtn" class="active" onclick="setChartMode('amount')">Raised vs Goal</button>
+        <button id="chartPercentBtn" onclick="setChartMode('percent')">Progress %</button>
+      </div>
+    </div>
+    <div class="progress-dashboard">
+      <div class="progress-panel">
+        <h3 id="chartHeading">Contribution by item</h3>
+        <p class="chart-hint">Hover or tap a column to inspect its values</p>
+        <div id="progressChart" aria-live="polite"><div class="chart-empty">Loading chart…</div></div>
+        <div id="chartTooltip" class="chart-tooltip">Select a column to see the breakdown.</div>
+      </div>
+      <aside class="progress-summary">
+        <div class="progress-ring">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Overall fundraising progress">
+            <circle class="ring-bg" cx="60" cy="60" r="49"></circle>
+            <circle id="ringValue" class="ring-value" cx="60" cy="60" r="49" stroke-dasharray="307.88" stroke-dashoffset="307.88"></circle>
+          </svg>
+          <div class="ring-center"><strong id="ringPercent">0%</strong><span>completed</span></div>
+        </div>
+        <div class="summary-label">Total raised</div>
+        <div class="summary-amount" id="chartRaised">₹0</div>
+        <div class="summary-foot" id="chartRemaining">Loading goal…</div>
+      </aside>
+    </div>
+  </div>
+</section>
 
 <section class="faq-section">
   <div class="max-w-3xl mx-auto px-4 py-14">
@@ -123,7 +197,7 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
   </div>
 </section>
 
-<footer class="text-center py-6 text-sm">Made with ❤️ for the Journey · </footer>
+<footer class="text-center py-6 text-sm">Made with ❤️ for the road · </footer>
 
 <div id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-card card p-5 bg-white/95">
@@ -165,6 +239,7 @@ const PAYEE_NAME = 'YOUR TRIPPER ';
 const QUICK = [5,10,20,50,100,500];
 
 let items = [], sel = {}, cur = null, timerInterval = null, paymentExpiresAt = 0;
+let chartMode = 'percent';
 let audioCtx = null;
 let soundEnabled = true;
 
@@ -219,6 +294,7 @@ function render() {
   $('#heroGoal').textContent = inr(goal);
   $('#heroRaised').textContent = inr(raised);
   $('#heroPercent').textContent = Math.round(pct(raised,goal)) + '%';
+  drawProgressChart();
   if (document.activeElement && document.activeElement.classList.contains('custom')) return updateBars();
 
   $('#grid').innerHTML = items.map(i => `
@@ -235,6 +311,65 @@ function render() {
       <button class="pay" onclick="openModal('${i._id}')">SUPPORT MY JOURNEY<br><small>Pay with UPI/QR</small></button>
     </article>`).join('');
 }
+
+
+function setChartMode(mode) {
+  chartMode = mode;
+  $('#chartPercentBtn').classList.toggle('active', mode === 'percent');
+  $('#chartAmountBtn').classList.toggle('active', mode === 'amount');
+  drawProgressChart();
+}
+function drawProgressChart() {
+  const host = $('#progressChart');
+  if (!host) return;
+  const raisedTotal = items.reduce((s,i) => s + Math.max(0,Number(i.raised || 0)),0);
+  const goalTotal = items.reduce((s,i) => s + Math.max(0,Number(i.target || 0)),0);
+  const overall = goalTotal ? Math.min(100,raisedTotal/goalTotal*100) : 0;
+  const ring = $('#ringValue');
+  if (ring) ring.style.strokeDashoffset = (307.88 - 307.88*overall/100).toFixed(2);
+  if ($('#ringPercent')) $('#ringPercent').textContent = Math.round(overall) + '%';
+  if ($('#chartRaised')) $('#chartRaised').textContent = inr(raisedTotal);
+  if ($('#chartRemaining')) $('#chartRemaining').textContent = `${inr(Math.max(0,goalTotal-raisedTotal))} left of ${inr(goalTotal)} goal`;
+  if (!items.length) {
+    host.innerHTML = '<div class="chart-empty">Progress will appear here when campaign items are available.</div>';
+    return;
+  }
+  $('#chartHeading').textContent = chartMode === 'percent' ? 'Completion by item' : 'Contribution by item';
+  const W=680,H=270,L=48,R=16,T=16,B=55, plotH=H-T-B, plotW=W-L-R;
+  const maxValue = chartMode === 'percent' ? 100 : Math.max(1,...items.map(i=>Number(i.target||0)),...items.map(i=>Number(i.raised||0)));
+  const niceMax = chartMode === 'percent' ? 100 : Math.ceil(maxValue/1000)*1000 || 1000;
+  const y = v => T + plotH - (v/niceMax)*plotH;
+  const slot=plotW/items.length, barW=Math.min(34,slot*.27);
+  let svg=`<div class="chart-scroll"><svg id="progressSvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Interactive fundraising chart">`;
+  for(let k=0;k<=4;k++){
+    const val=niceMax*k/4, yy=y(val);
+    svg+=`<line class="chart-gridline" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"></line><text class="chart-axis" x="${L-9}" y="${yy+4}" text-anchor="end">${chartMode==='percent'?Math.round(val)+'%':(val>=1000?'₹'+(val/1000)+'k':'₹'+val)}</text>`;
+  }
+  items.forEach((item,index)=>{
+    const raised=Math.max(0,Number(item.raised||0)), goal=Math.max(0,Number(item.target||0));
+    const pctVal=goal?Math.min(100,raised/goal*100):0;
+    const rv=chartMode==='percent'?pctVal:raised, gv=chartMode==='percent'?100:goal;
+    const x=L+slot*index+slot/2;
+    const rh=Math.max(0,plotH*rv/niceMax), gh=Math.max(0,plotH*gv/niceMax);
+    const safeTitle=String(item.title||'Item').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    svg+=`<rect class="chart-bar" tabindex="0" role="button" aria-label="${safeTitle}: ${inr(raised)} raised of ${inr(goal)}" data-index="${index}" x="${x-barW-3}" y="${y(gv)}" width="${barW}" height="${gh}" rx="7" fill="#cbd8cd" onclick="showChartDetail(${index})" onfocus="showChartDetail(${index})"><title>Goal: ${inr(goal)}</title></rect>`;
+    svg+=`<rect class="chart-bar" tabindex="0" role="button" aria-label="${safeTitle}: ${inr(raised)} raised of ${inr(goal)}" data-index="${index}" x="${x+3}" y="${y(rv)}" width="${barW}" height="${rh}" rx="7" fill="#58a879" onclick="showChartDetail(${index})" onfocus="showChartDetail(${index})"><title>Raised: ${inr(raised)}</title></rect>`;
+    const label=safeTitle.length>12?safeTitle.slice(0,11)+'…':safeTitle;
+    svg+=`<text class="chart-axis" x="${x}" y="${H-28}" text-anchor="middle">${label}</text>`;
+  });
+  svg+='</svg></div>';
+  host.innerHTML=svg;
+  items.forEach((_,i)=>{});
+  if (items.length) showChartDetail(0);
+}
+function showChartDetail(index) {
+  const item=items[index];
+  if(!item) return;
+  const raised=Math.max(0,Number(item.raised||0)),goal=Math.max(0,Number(item.target||0));
+  const progress=goal?Math.round(raised/goal*100):0;
+  $('#chartTooltip').textContent=`${item.title}: ${inr(raised)} raised of ${inr(goal)} goal · ${progress}% complete`;
+}
+
 function updateBars() {
   items.forEach(i => {
     const c = document.querySelector(`[data-id="${i._id}"]`);
