@@ -1,51 +1,231 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Top Supporters</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff8ec">
+<title>Top Supporters · Fund My Epic Adventure</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Fredoka',sans-serif;background:linear-gradient(#bfe9f7,#d9f5e8);color:#1d2b24}
-.card{background:white;border:2.5px solid #1d2b24;border-radius:20px;box-shadow:4px 4px 0 #1d2b24}
+:root{--ink:#17251f;--paper:#fff8ec;--green:#245b43;--lime:#c8f36b;--mint:#e5f1dc;--muted:#718075;--shadow:#315b46}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,sans-serif}
+.page{max-width:1240px;margin:auto;padding:12px 22px 55px}
+.nav{height:76px;padding:9px 15px 9px 20px;border:2px solid var(--ink);border-radius:999px;background:#fffaf0;box-shadow:4px 5px 0 var(--shadow);display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;font:900 16px/1.05 Manrope,sans-serif;letter-spacing:-.5px}
+.brand-mark{width:47px;height:47px;border:2px solid var(--ink);border-radius:15px;background:var(--lime);display:grid;place-items:center;font-size:28px;box-shadow:2px 3px 0 var(--shadow)}
+.nav-links{display:flex;align-items:center;gap:10px}
+.nav-links a{padding:11px 18px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:14px;font-weight:800}
+.nav-links a.active{background:var(--lime)}
+.nav-links a.nav-cta{border:1.5px solid var(--ink);background:#fff;box-shadow:2px 3px 0 var(--shadow)}
+.intro{position:relative;text-align:center;padding:43px 10px 27px}
+.back{position:absolute;left:18px;top:43px;color:var(--green);font-size:13px;font-weight:800;text-decoration:none}
+.back:hover{text-decoration:underline}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1.5px solid var(--ink);border-radius:999px;background:#fffdf7;box-shadow:2px 3px 0 #d7dfc9;color:var(--green);font-size:10px;font-weight:900;letter-spacing:1.5px}
+.trophy{display:inline-grid;place-items:center;width:56px;height:56px;margin:0 12px 0 0;border:1.5px solid var(--ink);border-radius:18px;background:var(--lime);box-shadow:3px 4px 0 var(--shadow);font-size:29px;vertical-align:middle}
+h1{font:900 clamp(38px,5.5vw,64px)/1.05 Manrope,sans-serif;letter-spacing:-2.5px;margin:17px 0 10px}
+.intro p{font-size:16px;color:#526657;margin:0}
+.underline-swish{width:190px;height:7px;border-radius:50%;background:var(--lime);margin:13px auto 0;transform:rotate(-1deg)}
+.supporters{max-width:900px;margin:16px auto 0;display:grid;gap:16px}
+.supporter{position:relative;display:flex;align-items:center;gap:18px;min-height:104px;padding:18px 24px;border:1.5px solid var(--ink);border-radius:23px;background:#fffdf7;box-shadow:5px 6px 0 #c6d6c3;transition:transform .16s,box-shadow .16s;overflow:hidden}
+.supporter:hover{transform:translateY(-2px);box-shadow:6px 8px 0 #b9cdb8}
+.rank{width:54px;height:54px;flex:0 0 54px;border-radius:18px;background:var(--mint);display:grid;place-items:center;font-size:29px}
+.rank.other{font:900 17px Manrope,sans-serif;color:var(--green)}
+.supporter-info{flex:1;min-width:0}
+.supporter-name{font:900 19px Manrope,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.supporter-meta{font-size:13px;color:var(--muted);margin-top:4px}
+.amount{padding:10px 18px;border-radius:999px;background:var(--lime);font:900 18px Manrope,sans-serif;white-space:nowrap}
+.supporter:nth-child(1){background:linear-gradient(105deg,#fffdf7,#f3f9df)}
+.supporter:nth-child(1) .rank{background:#fff0c4}
+.supporter:nth-child(2) .rank{background:#eee8f8}
+.supporter:nth-child(3) .rank{background:#f8e9d9}
+.updated{display:flex;align-items:center;justify-content:center;gap:13px;margin:28px auto 34px;color:#66776a;font-size:12px;font-weight:800}
+.updated:before,.updated:after{content:"";height:1px;max-width:220px;flex:1;background:#cbd7c8}
+.updated-pill{padding:9px 15px;border:1px solid #d0ddc8;border-radius:999px;background:#eff7df;color:var(--green)}
+.thanks{max-width:1120px;margin:0 auto;border:1.5px solid var(--ink);border-radius:27px;background:linear-gradient(115deg,#e9f8bd,#d9f2a5);box-shadow:6px 7px 0 var(--shadow);padding:28px 34px;display:grid;grid-template-columns:.85fr 1.15fr;align-items:center;gap:32px}
+.mountain-art{width:100%;max-width:440px;margin:auto;display:block}
+.thanks-copy{border-left:1.5px solid #7f9b70;padding-left:32px}
+.thanks-copy .small{font-size:10px;font-weight:900;letter-spacing:1.7px;color:var(--green)}
+.thanks h2{font:900 clamp(27px,3.6vw,43px)/1.08 Manrope,sans-serif;letter-spacing:-1.5px;margin:9px 0 13px}
+.thanks p{font-size:15px;line-height:1.7;color:#405846;margin:0}
+.thanks-tag{display:inline-flex;align-items:center;gap:8px;margin-top:17px;padding:8px 13px;border:1px solid var(--ink);border-radius:999px;background:#fffaf0;font-size:11px;font-weight:850;box-shadow:2px 3px 0 #b8ce9e}
+.footer{text-align:center;padding:30px 12px 0;color:#819082;font-size:12px}
+.empty,.error{border:1.5px solid var(--ink);border-radius:20px;background:#fffdf7;padding:28px;text-align:center;box-shadow:4px 5px 0 #c6d6c3;color:#526657}
+@media(max-width:700px){
+ .page{padding:10px 14px 40px}
+ .nav{height:auto;min-height:65px;border-radius:23px;padding:8px 10px}
+ .brand{font-size:12px;gap:7px}
+ .brand-mark{width:39px;height:39px;border-radius:12px;font-size:23px}
+ .nav-links{gap:0}
+ .nav-links a{font-size:11px;padding:9px 10px}
+ .nav-links a.nav-cta{display:none}
+ .intro{padding:38px 4px 20px}
+ .back{position:static;display:block;text-align:left;margin-bottom:24px}
+ h1{font-size:clamp(35px,10vw,49px);letter-spacing:-1.7px}
+ .trophy{width:46px;height:46px;font-size:24px;border-radius:15px;margin-right:7px}
+ .intro p{font-size:14px;line-height:1.5}
+ .supporters{gap:12px;margin-top:12px}
+ .supporter{min-height:82px;padding:13px 12px;gap:10px;border-radius:18px;box-shadow:4px 5px 0 #c6d6c3}
+ .rank{width:43px;height:43px;flex-basis:43px;border-radius:14px;font-size:24px}
+ .supporter-name{font-size:15px}
+ .supporter-meta{font-size:11px}
+ .amount{font-size:14px;padding:8px 10px}
+ .updated{margin:23px auto 27px;font-size:10px}
+ .thanks{grid-template-columns:1fr;gap:12px;padding:20px 17px;border-radius:22px;box-shadow:4px 5px 0 var(--shadow)}
+ .mountain-art{max-width:300px;max-height:145px}
+ .thanks-copy{border-left:0;border-top:1px solid #a9c18f;padding:17px 0 0}
+ .thanks h2{font-size:29px}
+ .thanks p{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Responsive layout correction: prevent heading and intro overflow */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+.page{width:100%;max-width:1240px;min-width:0}
+.intro{width:100%;min-width:0}
+.intro h1{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;max-width:100%;text-align:center}
+.intro h1 .trophy{flex:0 0 56px;margin:0}
+.intro>p{max-width:680px;margin:0 auto;padding:0 12px;line-height:1.55;overflow-wrap:anywhere}
+.supporters{width:100%;min-width:0}
+.supporter{min-width:0}
+.supporter-info{min-width:0}
+@media(max-width:700px){
+  .page{padding:10px 14px 40px}
+  .nav{width:100%;gap:8px;overflow:hidden}
+  .nav-links{min-width:0;flex-wrap:wrap;justify-content:flex-end}
+  .nav-links a{white-space:nowrap}
+  .intro{padding:34px 0 20px}
+  .intro h1{flex-direction:column;gap:9px;font-size:clamp(34px,8vw,48px);line-height:1.08;letter-spacing:-1.5px}
+  .intro h1 .trophy{width:48px;height:48px;flex-basis:48px;font-size:24px;border-radius:15px}
+  .intro>p{font-size:14px;max-width:100%;padding:0 10px}
+  .underline-swish{max-width:150px}
+  .back{position:static;display:block;text-align:left;margin:0 0 24px}
+}
+@media(max-width:390px){
+  .brand{font-size:11px}
+  .nav-links a{font-size:10px;padding:7px 8px}
+  .supporter{gap:8px;padding:12px 9px}
+  .amount{font-size:12px;padding:7px 8px}
+  .supporter-name{font-size:14px}
+}
+
+
+/* Keep the trophy and title visually separate at every screen size */
+.supporters-title{display:flex!important;align-items:center!important;justify-content:center!important;gap:14px!important;width:100%;max-width:100%;white-space:normal!important}
+.supporters-title .trophy{display:grid!important;place-items:center;flex:0 0 56px!important;margin:0!important}
+.supporters-title-text{display:inline-block;min-width:0;line-height:1.12;overflow-wrap:normal;word-break:normal}
+@media(max-width:700px){
+ .supporters-title{flex-direction:column!important;gap:9px!important}
+ .supporters-title .trophy{flex-basis:48px!important}
+ .supporters-title-text{font-size:clamp(34px,8vw,48px);letter-spacing:-1.5px}
+}
+
+
+/* Final heading fix: isolate trophy and title so no inherited rules can overlap */
+.intro .supporters-title{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  flex-direction:row!important;gap:16px!important;width:100%;max-width:100%;
+  margin:17px auto 10px!important;padding:0 10px;line-height:1.1;
+}
+.intro .supporters-title .trophy{
+  display:grid!important;place-items:center!important;position:static!important;
+  flex:0 0 56px!important;width:56px!important;height:56px!important;
+  margin:0!important;transform:none!important;
+}
+.intro .supporters-title-text{
+  display:block!important;position:static!important;flex:0 1 auto!important;
+  font-family:Manrope,Inter,sans-serif!important;font-size:clamp(38px,5.5vw,64px)!important;
+  font-weight:900!important;line-height:1.1!important;letter-spacing:-1.8px!important;
+  word-spacing:3px!important;white-space:normal!important;text-align:left;
+}
+@media(max-width:760px){
+  .intro .supporters-title{flex-direction:column!important;gap:12px!important;margin:16px auto 12px!important}
+  .intro .supporters-title .trophy{flex-basis:50px!important;width:50px!important;height:50px!important;font-size:24px!important}
+  .intro .supporters-title-text{font-size:clamp(36px,8vw,48px)!important;letter-spacing:-1px!important;text-align:center!important}
+}
+
 </style>
 </head>
-<body class="p-5">
-<main class="max-w-2xl mx-auto">
-<a href="/" class="underline">← Back to adventure</a>
-<h1 class="text-4xl font-bold text-center mt-8">🏆 Top Supporters</h1>
-<p class="text-center mt-2 mb-7">A big thank you to everyone supporting this journey!</p>
-<div id="leaders" class="space-y-3"></div>
-<p id="status" class="text-center text-sm mt-5"></p>
-</main>
-<script>
-const esc=s=>String(s??'Anonymous').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money=n=>'₹'+Number(n).toLocaleString('en-IN');
-async function load(){
-try{
-const r=await fetch('/api/supporters');
-if(!r.ok)throw Error();
-const people=await r.json();
-const medals=['🥇','🥈','🥉'];
-document.querySelector('#leaders').innerHTML=people.length?people.map((p,i)=>`
-<div class="card p-4 flex items-center gap-3">
-<div class="text-3xl">${medals[i]||'⭐'}</div>
-<div class="flex-1 min-w-0">
-<p class="font-bold text-lg break-words">${esc(p.name)}</p>
-<p class="text-xs text-gray-500">${p.donations} verified donation(s)</p>
+<body>
+<div class="page">
+  <nav class="nav">
+    <a class="brand" href="/" aria-label="Fund My Epic Adventure home">
+      <span class="brand-mark">⌁</span><span>Fund My<br>Epic Adventure</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a class="active" href="/supporters.html">Supporters</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cta" href="/#grid">Support the trek ↗</a>
+    </div>
+  </nav>
+
+  <header class="intro">
+    <a class="back" href="/">← Back to adventure</a>
+    <div class="eyebrow">✳ THE PEOPLE BEHIND THE JOURNEY</div>
+    <div class="supporters-title" role="heading" aria-level="1"><span class="trophy" aria-hidden="true">🏆</span><span class="supporters-title-text">Top Supporters</span></div>
+    <p>A big thank you to everyone supporting this journey!</p>
+    <div class="underline-swish"></div>
+  </header>
+
+  <main>
+    <section id="supporters" class="supporters" aria-live="polite">
+      <div class="empty">Loading our amazing supporters…</div>
+    </section>
+
+    <div class="updated"><span class="updated-pill">↻ &nbsp; Updated <span id="updatedAt">just now</span></span></div>
+
+    <section class="thanks">
+      <svg class="mountain-art" viewBox="0 0 500 230" role="img" aria-label="Illustration of green mountains, pine trees and a rising sun">
+        <circle cx="245" cy="76" r="53" fill="#f5c94e"/>
+        <path d="M15 196L142 53l66 77 67-94 180 160Z" fill="#6f9d72" stroke="#183f31" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M142 53l-33 38 28-7 13 18 18-16 23 19-49-52Z" fill="#fffdf2"/>
+        <path d="M275 36l-47 62 32-14 15 18 18-17 35 24-53-73Z" fill="#fffdf2"/>
+        <path d="M15 196L142 112l68 18 67-39 180 105Z" fill="#3f7858" stroke="#183f31" stroke-width="3"/>
+        <path d="M0 199Q100 175 190 196T500 190V230H0Z" fill="#245b43"/>
+        <g fill="#174b35" stroke="#174b35" stroke-linejoin="round">
+          <path d="M45 202l18-48 18 48h-11v18H56v-18Z"/><path d="M80 207l14-37 14 37h-9v15H89v-15Z"/>
+          <path d="M390 202l19-53 19 53h-12v20h-14v-20Z"/><path d="M430 208l13-37 13 37h-8v14h-10v-14Z"/>
+          <path d="M170 211l12-31 12 31h-8v13h-9v-13Z"/><path d="M320 211l12-31 12 31h-8v13h-9v-13Z"/>
+        </g>
+        <path d="M28 48l-15-15m39 6-2-22m18 38 15-15" stroke="#245b43" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M420 55l15-17m-2 39 22-7" stroke="#245b43" stroke-width="5" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="thanks-copy">
+        <div class="small">A NOTE FROM THE TRAIL</div>
+        <h2>Thank You to All My Supporters! 💚</h2>
+        <p>Your support, no matter how big or small, means a lot. It helps me gear up, travel safely, and get one step closer to the mountains. You're a part of this adventure!</p>
+        <div class="thanks-tag">✦ EVERY CONTRIBUTION COUNTS</div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">Made with gratitude, one step at a time · Fund My Epic Adventure</footer>
 </div>
-<strong class="text-green-700">${money(p.total)}</strong>
-</div>`).join(''):'<div class="card p-6 text-center">No verified supporters yet. Be the first! ❤️</div>';
-document.querySelector('#status').textContent='Updated just now';
-}catch(e){
-document.querySelector('#status').textContent='Could not load supporters. Please try again.';
+
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>'₹'+Number(n||0).toLocaleString('en-IN');
+async function loadSupporters(){
+  const box=document.querySelector('#supporters');
+  try{
+    const r=await fetch('/api/supporters');
+    if(!r.ok) throw new Error('Request failed');
+    const rows=await r.json();
+    box.innerHTML=rows.length?rows.map((s,i)=>`<article class="supporter">
+      <div class="rank ${i>2?'other':''}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</div>
+      <div class="supporter-info"><h2 class="supporter-name">${esc(s.name)}</h2><p class="supporter-meta">${Number(s.donations)||0} verified donation${Number(s.donations)===1?'':'s'}</p></div>
+      <strong class="amount">${money(s.total)}</strong>
+    </article>`).join(''):'<div class="empty">No verified supporters yet. Be the first to join the adventure! 💚</div>';
+    document.querySelector('#updatedAt').textContent='just now';
+  }catch(e){
+    box.innerHTML='<div class="error">Could not load supporters right now. Please refresh in a moment.</div>';
+  }
 }
-}
-load();
-setInterval(load,15000);
+loadSupporters();
+setInterval(loadSupporters,15000);
 </script>
 </body>
 </html>
-s
