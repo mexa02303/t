@@ -95,6 +95,207 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
 .chart-empty{padding:24px;text-align:center;color:#71847a}
 @media(max-width:760px){.progress-dashboard{grid-template-columns:1fr}.progress-summary{display:grid;grid-template-columns:120px 1fr;gap:0 16px;text-align:left;justify-items:start;padding:18px}.progress-ring{width:112px;height:112px;grid-row:span 3;margin:0}.ring-center strong{font-size:23px}.progress-summary .summary-label,.progress-summary .summary-amount,.progress-summary .summary-foot{align-self:center}}
 @media(max-width:600px){.progress-section{padding:40px 14px}.progress-panel{padding:17px 13px}.progress-summary{padding:16px}.progress-controls button{padding:9px 12px;font-size:12px}}
+
+/* NEW BRUTALIST ART DIRECTION */
+:root{--ink:#17251d;--paper:#f5f0e5;--green:#174b35;--lime:#b7f36b;--line:#17251d;--soft:#e9e2d4}
+html{scroll-behavior:smooth}
+body{background:var(--paper)!important;color:var(--ink)!important;font-family:'Inter',sans-serif}
+.hero{min-height:650px;padding:24px 22px 48px;background-image:linear-gradient(90deg,rgba(12,35,25,.82),rgba(12,35,25,.28) 78%),url('/mountain-hero.png');background-position:center 48%;border-bottom:4px solid var(--ink)}
+.hero-inner{max-width:1180px}
+.hero-top{margin-bottom:90px}
+.hero-brand{font-family:'Manrope',sans-serif;font-size:21px;letter-spacing:-.8px;background:var(--lime);color:var(--ink);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:10px 14px}
+.hero-nav{gap:10px}
+.hero-nav a{padding:10px 14px;border:2px solid #fff;background:#173b2d;color:#fff!important;font-weight:800;box-shadow:3px 3px 0 #fff}
+.hero-copy{max-width:760px}
+.hero-kicker{border:2px solid var(--ink);border-radius:4px;background:var(--lime);color:var(--ink);font-weight:800;box-shadow:4px 4px 0 var(--ink)}
+.hero h1{text-shadow:4px 4px 0 #14291f;font-size:clamp(48px,8vw,88px);letter-spacing:-3.5px;line-height:.96}
+.hero h1 span{color:var(--lime)!important}
+.hero-copy>p{max-width:650px;font-size:clamp(16px,2vw,20px);font-weight:600;text-shadow:1px 2px 0 #10251c}
+.hero-actions a{border:3px solid var(--ink);border-radius:5px;padding:14px 22px;font-weight:800;box-shadow:5px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.hero-actions a:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.hero-primary{background:var(--lime);color:var(--ink)}
+.hero-secondary{background:var(--paper);color:var(--ink);border-color:var(--ink)!important}
+.hero-stats{gap:14px;margin-top:36px}
+.hero-stat{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:5px;backdrop-filter:none;box-shadow:5px 5px 0 var(--ink);padding:13px 17px;font-weight:700}
+.hero-stat strong{font-family:'Manrope',sans-serif;font-size:23px}
+.hero .bar{height:17px;border:3px solid var(--ink);border-radius:3px;background:#e7e0d3!important}
+.hero .bar>i{background:var(--lime);border-right:3px solid var(--ink)}
+#totalText{font-weight:800;text-shadow:1px 1px 0 #10251c}
+.fund-section{background:var(--paper) url('/funding-background.svg') center top/cover no-repeat;border-bottom:4px solid var(--ink);padding:38px 0 58px}
+#grid{max-width:1120px}
+.card{background:#fff!important;border:3px solid var(--ink)!important;border-radius:5px!important;box-shadow:7px 7px 0 var(--ink)!important;backdrop-filter:none!important;transition:transform .16s,box-shadow .16s}
+.card:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--ink)!important}
+.amt{border:2px solid var(--ink)!important;border-radius:3px!important;background:var(--paper)!important;color:var(--ink);font-weight:800!important;box-shadow:2px 2px 0 var(--ink)}
+.amt.on{background:var(--lime)!important}
+.pay{background:var(--green)!important;color:#fff!important;border:3px solid var(--ink)!important;border-radius:4px!important;box-shadow:4px 4px 0 var(--ink)!important;font-weight:800!important}
+.pay:hover{background:#246b49!important}
+.pay:active{transform:translate(3px,3px)!important;box-shadow:1px 1px 0 var(--ink)!important}
+input,textarea{border:2px solid var(--ink)!important;border-radius:4px!important;background:#fff!important;padding:10px 12px!important}
+:focus-visible{outline:3px solid #e08a31!important;outline-offset:3px}
+#modal{background:rgba(18,35,25,.78)!important;backdrop-filter:blur(2px)!important}
+#modal .modal-card{border:3px solid var(--ink)!important;border-radius:5px!important;box-shadow:9px 9px 0 var(--lime)!important;background:var(--paper)!important}
+#modal button{border-radius:4px!important}
+.faq-section{background:#e8e1d3!important;border-top:4px solid var(--ink)!important;color:var(--ink)!important}
+.faq-container{max-width:1000px!important}
+.faq-label,.progress-eyebrow{color:var(--green)!important;font-weight:900!important}
+.faq-container h2,.progress-title{font-family:'Manrope',sans-serif!important;font-weight:900!important;letter-spacing:-1.5px}
+.faq-item{background:#fff!important;border:2px solid var(--ink)!important;border-radius:4px!important;box-shadow:4px 4px 0 var(--ink)!important}
+.faq-item summary{font-weight:850!important}
+.faq-item summary:after{color:var(--green)!important;font-weight:900!important}
+.progress-section{background:var(--lime)!important;color:var(--ink)!important;border-bottom:4px solid var(--ink)}
+.progress-title{color:var(--ink)!important}
+.progress-subtitle,.chart-hint{color:#425b49!important}
+.progress-controls{background:var(--paper)!important;border:2px solid var(--ink)!important;border-radius:4px!important;box-shadow:4px 4px 0 var(--ink)!important;padding:4px!important}
+.progress-controls button{border-radius:2px!important;color:var(--ink)!important;font-weight:900!important}
+.progress-controls button.active{background:var(--green)!important;color:#fff!important;box-shadow:2px 2px 0 var(--ink)!important}
+.progress-panel,.progress-summary{background:var(--paper)!important;border:3px solid var(--ink)!important;border-radius:5px!important;box-shadow:7px 7px 0 var(--ink)!important}
+.progress-panel h3,.summary-amount,.ring-center strong{color:var(--ink)!important;font-family:'Manrope',sans-serif!important;font-weight:900!important}
+.chart-gridline{stroke:#c8c0b2!important;stroke-dasharray:0!important}
+.chart-axis{fill:#536458!important;font-weight:700!important}
+.chart-tooltip{background:#fff!important;border:2px solid var(--ink)!important;border-radius:4px!important;box-shadow:3px 3px 0 var(--ink)!important;color:var(--ink)!important;font-weight:700}
+.progress-ring .ring-bg{stroke:#d5ccba!important}
+.progress-ring .ring-value{stroke:var(--green)!important}
+footer{border-top:4px solid var(--ink)!important}
+@media(max-width:640px){
+ .hero{min-height:680px;padding:18px 15px 36px;background-position:60% center}
+ .hero-top{align-items:flex-start;flex-direction:column;margin-bottom:70px}
+ .hero-brand{font-size:17px}
+ .hero-nav{width:100%;gap:8px}
+ .hero-nav a{font-size:12px;padding:8px 10px}
+ .hero h1{font-size:clamp(43px,12vw,60px);letter-spacing:-2px}
+ .hero-stats{gap:9px}
+ .hero-stat{padding:10px 12px}
+ .hero-stat strong{font-size:18px}
+ .fund-section{padding-top:22px}
+ .card{box-shadow:5px 5px 0 var(--ink)!important}
+ .progress-panel,.progress-summary{box-shadow:5px 5px 0 var(--ink)!important}
+}
+
+
+/* SOFT NEO-BRUTALISM — refined visual system */
+:root{--sn-ink:#17251f;--sn-paper:#fff9ed;--sn-cream:#f7efdf;--sn-green:#245b43;--sn-lime:#c8f36b;--sn-mint:#e5f1dc;--sn-muted:#718075;--sn-shadow:#315b46}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sn-paper)!important;color:var(--sn-ink)!important;font-family:'Inter',sans-serif}
+.hero{min-height:0;padding:16px 22px 18px;background:radial-gradient(circle at 82% 32%,#eaf6d9 0 18%,transparent 18.2%),linear-gradient(135deg,#fff9ed 0%,#f7f0e2 100%)!important;color:var(--sn-ink)!important;border:0!important;display:block}
+.hero-inner{max-width:1240px;margin:auto}
+.hero-top{height:76px;margin:0 0 42px!important;padding:9px 15px 9px 20px;border:2px solid var(--sn-ink);border-radius:999px;background:#fffaf0;box-shadow:4px 5px 0 var(--sn-shadow);display:flex;align-items:center;justify-content:space-between}
+.hero-brand{display:flex;align-items:center;gap:11px;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;color:var(--sn-ink)!important;text-decoration:none;font:900 16px/1.05 'Manrope',sans-serif;letter-spacing:-.5px}
+.brand-mark{width:47px;height:47px;border:2px solid var(--sn-ink);border-radius:15px;background:var(--sn-lime);display:grid;place-items:center;font-size:35px;line-height:1;box-shadow:2px 3px 0 var(--sn-shadow)}
+.hero-nav{display:flex;align-items:center;gap:10px}
+.hero-nav a{padding:11px 17px;border:0!important;border-radius:999px;background:transparent!important;color:var(--sn-ink)!important;text-decoration:none;font-size:14px;font-weight:750;box-shadow:none!important}
+.hero-nav a.nav-active{background:var(--sn-lime)!important}
+.hero-nav a.nav-cta{border:2px solid var(--sn-ink)!important;background:#fff!important;box-shadow:2px 3px 0 var(--sn-shadow)!important}
+.nav-cta span{margin-left:9px}
+.hero-layout{display:grid;grid-template-columns:1fr .92fr;gap:44px;align-items:center;padding:0 18px 18px}
+.hero-copy{max-width:620px}
+.hero-kicker{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--sn-ink);border-radius:999px;padding:8px 13px;background:#fffdf7;color:var(--sn-green);font-size:10px;font-weight:900;letter-spacing:1.5px;box-shadow:2px 3px 0 #d7dfc9;margin-bottom:19px}
+.kicker-dot,.caption-dot{width:8px;height:8px;border-radius:50%;background:#73ad43;display:inline-block}
+.hero h1{font:900 clamp(52px,6.2vw,82px)/.96 'Manrope',sans-serif;letter-spacing:-4px;color:var(--sn-ink);text-shadow:none;margin:0}
+.hero h1 span{display:inline-block;background:var(--sn-lime);padding:0 13px 7px;border-radius:18px;transform:rotate(-1deg);color:var(--sn-ink)!important}
+.hero-copy>p{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#45564a;max-width:530px;font-weight:500;margin:19px 0 0;text-shadow:none}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:25px}
+.hero-actions a{min-height:56px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 21px;border:2px solid var(--sn-ink)!important;border-radius:999px!important;font-weight:850;font-size:15px;text-decoration:none;box-shadow:4px 5px 0 var(--sn-shadow)!important;transition:transform .16s,box-shadow .16s}
+.hero-actions a:hover{transform:translate(2px,2px);box-shadow:2px 3px 0 var(--sn-shadow)!important}
+.hero-primary{background:var(--sn-lime)!important;color:var(--sn-ink)!important}
+.hero-secondary{background:#fffaf0!important;color:var(--sn-ink)!important}
+.heart-icon{font-size:24px;line-height:1}
+.hero-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:29px;color:var(--sn-ink)}
+.hero-stat{display:flex;align-items:center;gap:11px;min-width:140px;padding:11px 14px;background:#fffdf7;border:1.5px solid var(--sn-ink);border-radius:19px;box-shadow:3px 4px 0 #c6d6c3;backdrop-filter:none}
+.stat-icon{width:34px;height:34px;border-radius:12px;background:var(--sn-mint);display:grid;place-items:center;font-size:23px;font-weight:900;color:var(--sn-green)}
+.hero-stat strong{display:block;font:900 19px 'Manrope',sans-serif}
+.hero-stat small{display:block;font-size:11px;color:var(--sn-muted);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.hero-total-progress{max-width:590px;margin-top:19px}
+.hero .bar{height:13px;border:1.5px solid var(--sn-ink);border-radius:999px;background:#e5e7d9!important;overflow:hidden}
+.hero .bar>i{background:linear-gradient(90deg,#7fbd4d,var(--sn-lime));border:0;border-radius:999px}
+#totalText{font-size:12px;color:#536456!important;font-weight:800;margin-top:8px}
+.hero-visual{position:relative;min-height:410px;display:flex;align-items:center;justify-content:center}
+.hero-blob{position:absolute;width:95%;height:88%;background:var(--sn-lime);border-radius:43% 57% 49% 51%/52% 42% 58% 48%;transform:rotate(5deg)}
+.hero-photo-frame{position:relative;width:92%;height:390px;overflow:hidden;border:2px solid var(--sn-ink);border-radius:32% 18% 25% 20%/20% 25% 18% 30%;background:#dce9d6;box-shadow:7px 8px 0 var(--sn-shadow);transform:rotate(1.5deg)}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center 48%;display:block}
+.photo-sticker{position:absolute;top:22px;left:0;z-index:2;width:92px;height:92px;border:2px solid var(--sn-ink);border-radius:50%;background:#fff9ed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:900 10px/1.15 'Manrope',sans-serif;letter-spacing:1px;box-shadow:4px 4px 0 var(--sn-shadow);transform:rotate(-11deg)}
+.photo-sticker span{font-size:20px;color:#78a83c}
+.photo-caption{position:absolute;bottom:8px;right:0;z-index:2;background:#fff9ed;border:1.5px solid var(--sn-ink);border-radius:999px;padding:10px 15px;font-size:9px;letter-spacing:1.1px;font-weight:900;box-shadow:3px 3px 0 var(--sn-shadow)}
+.photo-caption .caption-dot{margin-right:7px}
+.hero-bottom-note{display:flex;justify-content:space-between;gap:15px;border-top:1px solid #d9dfd0;margin:14px 18px 0;padding:14px 0 0;color:#728071;font-size:10px;font-weight:900;letter-spacing:1.2px}
+.hero-bottom-note b{color:var(--sn-green);font-size:16px;margin-left:7px}
+.fund-section{min-height:0;padding:50px 22px 65px;background:linear-gradient(180deg,#edf4e4,#f9f3e7)!important;border:0!important}
+.section-intro{max-width:1120px;margin:0 auto 25px;display:flex;justify-content:space-between;align-items:end;gap:20px}
+.section-kicker{font-size:10px;letter-spacing:1.6px;font-weight:900;color:#66844e}
+.section-intro h2{font:900 clamp(30px,4vw,43px)/1.05 'Manrope',sans-serif;letter-spacing:-1.7px;margin:8px 0 7px}
+.section-intro h2 span{color:#80b943}
+.section-intro p{color:#69796c;margin:0;font-size:14px}
+.intro-note{border:1.5px solid var(--sn-ink);border-radius:18px;background:#fffaf0;padding:12px 17px;box-shadow:3px 4px 0 #c6d6c3;font-size:12px;font-weight:800;line-height:1.5}
+.intro-note b{font-size:18px;color:#6e9e3b;margin-left:10px}
+#grid{max-width:1120px!important;gap:22px!important}
+.card{background:#fffdf7!important;border:1.5px solid var(--sn-ink)!important;border-radius:22px!important;box-shadow:4px 5px 0 #c6d6c3!important;transition:transform .18s,box-shadow .18s!important}
+.card:hover{transform:translateY(-3px)!important;box-shadow:6px 8px 0 #b9cdb8!important}
+.amt{border:1.5px solid var(--sn-ink)!important;border-radius:999px!important;background:#fffaf0!important;color:var(--sn-ink)!important;box-shadow:1px 2px 0 #c6d6c3!important;font-weight:800!important;padding:5px 12px!important}
+.amt.on{background:var(--sn-lime)!important}
+.pay{background:var(--sn-green)!important;color:#fff!important;border:1.5px solid var(--sn-ink)!important;border-radius:999px!important;box-shadow:3px 4px 0 #aabda9!important;font-weight:850!important;padding:11px 15px!important}
+.pay:active{transform:translate(2px,2px)!important;box-shadow:1px 2px 0 #aabda9!important}
+input,textarea{border:1.5px solid var(--sn-ink)!important;border-radius:13px!important;background:#fff!important;padding:10px 12px!important}
+#modal{background:rgba(28,51,39,.48)!important;backdrop-filter:blur(7px)!important}
+#modal .modal-card{border:1.5px solid var(--sn-ink)!important;border-radius:25px!important;box-shadow:8px 9px 0 #315b46!important;background:#fff9ed!important}
+#modal .modal-card .bg-yellow-100{background:#eff6df!important;border-color:#b9cba9!important}
+.faq-section{background:#fff8ec!important;border-top:1px solid #e4ddce!important;color:var(--sn-ink)!important}
+.faq-section>div{max-width:920px!important}
+.faq-item{background:#fffdf7!important;border:1.5px solid var(--sn-ink)!important;border-radius:17px!important;padding:18px 20px!important;box-shadow:3px 4px 0 #d1ddc9!important}
+.faq-item summary{font-weight:800!important}
+.faq-item summary:after{color:#65983c!important}
+.progress-section{background:#eaf3df!important;color:var(--sn-ink)!important;padding:54px 22px!important}
+.progress-wrap{max-width:1120px!important}
+.progress-title{color:var(--sn-ink)!important;font:900 clamp(30px,4vw,42px)/1.05 'Manrope',sans-serif!important;letter-spacing:-1.5px}
+.progress-subtitle{color:#68796a!important}
+.progress-controls{background:#fff9ed!important;border:1.5px solid var(--sn-ink)!important;border-radius:999px!important;box-shadow:2px 3px 0 #c6d6c3!important;padding:4px!important}
+.progress-controls button{border-radius:999px!important;color:#526657!important}
+.progress-controls button.active{background:var(--sn-lime)!important;color:var(--sn-ink)!important;box-shadow:1px 2px 0 #a8bd9e!important}
+.progress-panel,.progress-summary{background:#fffaf0!important;border:1.5px solid var(--sn-ink)!important;border-radius:23px!important;box-shadow:4px 5px 0 #c6d6c3!important;padding:23px!important}
+.progress-panel h3,.summary-amount,.ring-center strong{color:var(--sn-ink)!important}
+.chart-tooltip{background:#f0f6e7!important;border:1px solid #bdcdb3!important;border-radius:13px!important;box-shadow:inset 1px 2px 4px #dce6d4!important;color:#435a49!important}
+.progress-ring .ring-bg{stroke:#e3e8d9!important}
+.progress-ring .ring-value{stroke:#8bc34f!important}
+footer{background:#e7efdd!important;border-top:1px solid #d4dfcc!important;color:#647568!important}
+@media(max-width:850px){
+ .hero-layout{grid-template-columns:1fr .8fr;gap:22px;padding:0 5px}
+ .hero-photo-frame{height:330px}
+ .hero-visual{min-height:350px}
+ .hero-stats{gap:8px}
+ .hero-stat{min-width:125px;padding:9px}
+}
+@media(max-width:640px){
+ .hero{padding:12px 14px 18px}
+ .hero-top{height:auto;min-height:66px;border-radius:25px;padding:9px 12px;margin-bottom:27px!important;align-items:center}
+ .brand-mark{width:40px;height:40px;font-size:29px;border-radius:12px}
+ .hero-brand{font-size:13px}
+ .hero-nav{gap:2px}
+ .hero-nav a{font-size:11px;padding:8px 9px}
+ .hero-nav a.nav-cta{display:none}
+ .hero-layout{grid-template-columns:1fr;gap:20px;padding:0 3px}
+ .hero-copy{max-width:none}
+ .hero h1{font-size:clamp(49px,13vw,68px);letter-spacing:-2.8px}
+ .hero-copy>p{font-size:15px;line-height:1.55}
+ .hero-actions{gap:10px;margin-top:19px}
+ .hero-actions a{min-height:49px;padding:10px 14px;font-size:13px;box-shadow:3px 4px 0 var(--sn-shadow)!important}
+ .hero-stat{min-width:0;flex:1;gap:7px;padding:9px 8px;border-radius:14px}
+ .stat-icon{width:28px;height:28px;font-size:18px}
+ .hero-stat strong{font-size:15px}
+ .hero-stat small{font-size:9px}
+ .hero-total-progress{margin-top:15px}
+ .hero-visual{min-height:270px;margin:0 7px}
+ .hero-photo-frame{height:260px;width:91%;border-radius:28% 16% 23% 18%/18% 23% 16% 28%}
+ .photo-sticker{width:72px;height:72px;font-size:8px;top:9px}
+ .photo-caption{font-size:8px;bottom:0}
+ .hero-bottom-note{margin:12px 4px 0;font-size:8px}
+ .fund-section{padding:38px 14px 48px}
+ .section-intro{align-items:flex-start;flex-direction:column;margin-bottom:20px}
+ .intro-note{display:none}
+ #grid{padding-left:0!important;padding-right:0!important}
+ .progress-section{padding:40px 14px!important}
+ .progress-head{align-items:flex-start}
+ .progress-panel,.progress-summary{padding:16px!important}
+ .faq-section>div{padding-top:40px!important;padding-bottom:40px!important}
+}
+
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -104,35 +305,47 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
 <section class="hero">
   <div class="hero-inner">
     <nav class="hero-top">
-      <div class="hero-brand">🏔️ Fund My Epic Adventure</div>
+      <a class="hero-brand" href="#" aria-label="Fund My Epic Adventure home">
+        <span class="brand-mark">⌁</span><span>Fund My<br>Epic Adventure</span>
+      </a>
       <div class="hero-nav">
-        <a href="#grid">Items</a>
+        <a class="nav-active" href="#">Home</a>
         <a href="/supporters.html">Supporters</a>
-        <a href="#grid">Journey</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#grid">Support the trek <span>↗</span></a>
       </div>
     </nav>
-    <div class="hero-copy">
-      <div class="hero-kicker">🥾 A Himalayan Trek Dream</div>
-      <h1>Help Me Go <span style="color:#a9ed75">Hiking</span></h1>
-      <p>Support my journey to the mountains. Your contribution helps me cover essential gear, travel, and everything needed for the trail.</p>
-      <div class="hero-actions">
-        <a class="hero-primary" href="#grid">Support My Journey&nbsp; →</a>
-        <a class="hero-secondary" href="/supporters.html">🏆 Top Supporters</a>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker"><span class="kicker-dot"></span> A HIMALAYAN TREK DREAM</div>
+        <h1>Help Me Go<br><span>Hiking.</span></h1>
+        <p>Big mountains. Small steps. Your contribution helps me get the gear, travel, and essentials I need to make this journey happen.</p>
+        <div class="hero-actions">
+          <a class="hero-primary" href="#grid"><span class="heart-icon">♡</span> Support My Journey <b>→</b></a>
+          <a class="hero-secondary" href="/supporters.html"><span>🏆</span> Top Supporters</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="stat-icon">⌁</span><div><strong id="heroGoal">—</strong><small>Total goal</small></div></div>
+          <div class="hero-stat"><span class="stat-icon">▤</span><div><strong id="heroRaised">—</strong><small>Raised so far</small></div></div>
+          <div class="hero-stat"><span class="stat-icon">↗</span><div><strong id="heroPercent">—</strong><small>Progress</small></div></div>
+        </div>
+        <div class="hero-total-progress">
+          <div class="bar"><i id="totalBar" style="width:0"></i></div>
+          <p id="totalText"></p>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><span>Total Adventure Goal</span><strong id="heroGoal">—</strong></div>
-        <div class="hero-stat"><span>Raised So Far</span><strong id="heroRaised">—</strong></div>
-        <div class="hero-stat"><span>Progress</span><strong id="heroPercent">—</strong></div>
-      </div>
-      <div class="mt-5 max-w-xl">
-        <div class="bar" style="background:#ffffff33;border-color:#ffffff55"><i id="totalBar" style="width:0"></i></div>
-        <p id="totalText" class="text-sm mt-2 font-medium text-white"></p>
+      <div class="hero-visual">
+        <div class="hero-blob"></div>
+        <div class="hero-photo-frame"><img src="/mountain-hero.png" alt="A hiker standing on a mountain ridge"></div>
+        <div class="photo-sticker">THE<br>BIG<br>ADVENTURE <span>✳</span></div>
+        <div class="photo-caption"><span class="caption-dot"></span> THE MOUNTAINS ARE CALLING</div>
       </div>
     </div>
+    <div class="hero-bottom-note"><span>01 / THE JOURNEY</span><span>EVERY LITTLE BIT GETS ME CLOSER <b>↓</b></span></div>
   </div>
 </section>
 
-<section class="fund-section"><main id="grid" class="max-w-5xl mx-auto px-4 py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></main></section>
+<section class="fund-section"><div class="section-intro"><div><span class="section-kicker">02 / MAKE IT HAPPEN</span><h2>Support My Adventure<span>.</span></h2><p>Choose a part of the journey you would like to help with.</p></div><div class="intro-note">Every contribution<br>moves the trail forward <b>↘</b></div></div><main id="grid" class="max-w-5xl mx-auto px-4 py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></main></section>
 
 
 <section class="progress-section" id="progress">
@@ -171,7 +384,7 @@ input,textarea{border:2px solid #1d2b24;border-radius:10px;padding:6px 10px;widt
   </div>
 </section>
 
-<section class="faq-section">
+<section class="faq-section" id="faq">
   <div class="max-w-3xl mx-auto px-4 py-14">
     <p class="text-sm font-semibold uppercase tracking-widest text-emerald-700 mb-2">Need to know?</p>
     <h2 class="text-3xl sm:text-4xl font-extrabold mb-3" style="font-family:'Manrope','Inter',sans-serif">Frequently Asked Questions</h2>
